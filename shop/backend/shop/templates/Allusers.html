@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{% extends 'layout.html' %}
+
+{% block title %}
+    Все Пользователи
+{% endblock %}
+
+{% block body %}
+<div class="container main">
+    <h1>Все Пользователи</h1>
+    <a href = "{{ url_for('admin_display') }}" class = "btn btn-primary">Назад</a>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class = "flashes">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    
+    {% if users %}
+        {% for el in users %}
+            <form method="post">
+                <div class="card text-white bg-primary mb-3" style="max-width: 100%;">
+                    <div class="card-header">{{ el.id }}</div>
+                    <div class="card-body">
+                        <input style="display: none;" name = "user" value = "{{ el.id }}">
+                        <h5 class="card-title">Логин: {{ el.login }}</h5>
+                        <p class="card-text">Пароль: {{ el.password }}</p>
+                        <button type="submit" class = "btn btn-danger">Удалить</button>
+                    </div>
+                </div>
+            </form>
+        {% endfor %}
+    {% else %}
+        <div class="card text-white bg-primary mb-3" style="max-width: 100%;">
+            <div class="card-body">
+                Нету Пользователей
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

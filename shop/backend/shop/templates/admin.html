@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{% extends 'layout.html' %}
+
+{% block title %}
+    Вход в Админ панель
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <main class="form-signin w-100 m-auto Admin">
+        <form method = "post">
+          <h1 class="h3 mb-3 fw-normal">Вход в Админ панель</h1>
+          
+          {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                  <ul class = "flashes">
+                      {% for message in messages %}
+                          <li>{{ message }}</li>
+                      {% endfor %}
+                  </ul>
+              {% endif %}
+          {% endwith %}
+
+          <div class="form-floating">
+            <input type="text" class="form-control" id="floatingInput" placeholder="Вашь Логин" name = "login">
+            <label for="floatingInput">Логин:</label>
+          </div><br>
+
+          <div class="form-floating">
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Вашь пароль" name = "password" >
+            <label for="floatingPassword">Пароль</label>
+          </div><br>
+      
+
+          <button class="btn btn-primary w-100 py-2" type="submit">Войти</button><br><br>
+          <div>
+            <a href="/login" class="btn btn-dark">Войти как Пользователь</a>
+            <a href="/register" class = "btn btn-primary">Зарегистрироваться</a>
+          </div>
+          
+        </form>
+    </main>
+</div>
+
+{% endblock %}

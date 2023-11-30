@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+{% extends 'layout.html' %}
+
+{% block title %}
+    Ошибка
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <h1>Ошибка</h1>
+    <h3 style="color: brown;">{{ info }}</h3>
+    <a href="{{ back }}" class = "btn btn-primary">Назад</a>
+</div>
+
+{% endblock %}

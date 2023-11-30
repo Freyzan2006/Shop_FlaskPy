@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% extends 'layout.html' %}
+
+{% block title %}
+    Профиль {{ current_user.login }}
+{% endblock %}
+
+{% block body %}
+<div class="container main">
+    <h1>Профиль: "{{ current_user.login }}"</h1>
+
+    <form method="post">
+        <h1 class="h3 mb-3 fw-normal">Изменить Профиль</h1>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class = "flashes">
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+    
+        <div class="form-floating">
+            <input type="text" class="form-control" id="floatingInput" placeholder="Вашь Логин" name = "login">
+            <label for="floatingInput">Вашь Логин</label>
+        </div><br>
+
+        <div class="form-floating">
+            <input type="text" class="form-control" id="floatingInput2" placeholder="Вашь Новый Логин" name = "login2">
+            <label for="floatingInput">Вашь Новый Логин</label>
+        </div><br>
+
+        <div class="form-floating">
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Вашь Пароль" name = "password">
+            <label for="floatingPassword">Вашь Пароль</label>
+        </div><br>
+
+        <div class="form-floating">
+            <input type="password" class="form-control" id="floatingPassword2" placeholder="Вашь Новый Пароль" name="password2">
+            <label for="floatingPassword">Вашь Новый Пароль</label>
+        </div><br>
+    
+
+
+        <button class="btn btn-success w-100 py-2" type="submit">Изменить</button>
+
+    </form>
+</div>
+{% endblock %}

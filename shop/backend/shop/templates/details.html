@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% extends 'layout.html' %}
+
+{% block title %}
+    Дитали товара
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <main class = "Details">
+        <div class="card" style="width: 30rem;">
+            <img src="{{ url_for('display_image', filename = item.image) }}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Название: {{ item.title }}</h5>
+              <p class="card-text"><b>Цена: {{ item.price }} {{ item.price_type }}</b></p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">An item</li>
+              <li class="list-group-item">A second item</li>
+              <li class="list-group-item">A third item</li>
+            </ul>
+            <div class="card-body">
+                <a href = "/buy/{{ item.id }}" class="btn btn-lg btn-primary">Купить</a>
+                <a href = "/" class="btn btn-lg btn-primary">Назад</a>
+            </div>
+        </div>
+    </main>
+</div>
+
+{% endblock %}

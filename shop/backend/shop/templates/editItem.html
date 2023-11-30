@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+{% extends 'layout.html' %}
+
+{% block title %}
+    Изменить товар
+{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/editItem.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="container">
+        <h1>Изменить товар</h1>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class = "flashes">
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        <form method="post" enctype="multipart/form-data" class = "form-edit">
+            <label for="img">
+                <img src="{{ url_for('display_image', filename = item.image) }}" alt="Картинка товара">
+            </label><br>
+            
+            <label for="img">Сейчас картинка: {{ item.image }}</label><br>
+            <input type="file" name = "file" class = "form-control" autocomplete="off" id = "img"><br>
+            <input type = "text" class = "form-control" name = "title" id = "title" placeholder="Введите название" value="{{ item.title }}"><br>
+            <div class = "d-flex gap-5">
+                <input type = "number" class = "form-control" name = "price" id = "price" placeholder="Введите цену" value="{{ item.price }}">
+                <div class="dropdown">
+                
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ item.price_type }}
+                    </button>
+    
+                    
+    
+                    <ul class="dropdown-menu" >
+                      <li><button class="dropdown-item" type="button" value="RUB">RUB</button></li>
+                      <li><button class="dropdown-item"  type="button" value="USD">USD</button></li>
+                      <li><button class="dropdown-item"  type="button" value="EUR">EUR</button></li>
+                    </ul>
+                </div>
+            </div><br>
+            <input style="display: none;" id = "price_type" name = "price_type"><br>
+            
+            
+            <button class = "btn btn-success" type="submit">Изменить</button>
+            <a href = "{{ back }}" class = "btn btn-danger">Назад</a>
+            
+
+
+
+        </form>
+    </div>
+</div>
+
+
+<style>
+    .dropdown-menu.active {
+        display: block;
+    }
+</style>
+
+<script>
+    let btn = document.getElementById("dropdownMenuButton1")
+    let menu = document.querySelector(".dropdown-menu")
+    let price_type = document.getElementById("price_type")
+    price_type.value = "RUB"
+
+    btn.addEventListener('click', () => {
+        
+        
+
+        menu.classList.toggle('active')
+
+
+
+        let menu_btn = menu.querySelectorAll("button")
+
+        for (let i = 0; i < menu_btn.length; i++) {
+            menu_btn[i].addEventListener('click', () => {
+                if (i == 0) {
+                    menu.classList.remove('active')
+                    btn.innerHTML = "RUB"
+                    price_type.value = "RUB";
+                    console.log(price_type.value)
+                } else if (i == 1) {
+                    menu.classList.remove('active')
+                    btn.innerHTML = "USD"
+                    price_type.value = "USD";
+                    console.log(price_type.value)
+                } else {
+                    menu.classList.remove('active')
+                    btn.innerHTML = "EUR"
+                    price_type.value = "EUR";
+                    console.log(price_type.value)
+                }
+
+            })
+        }
+
+    })
+</script>
+{% endblock %}
+

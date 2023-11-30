@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+{% extends 'layout.html' %}
+
+{% block title %}
+    Добавить товар
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="container">
+        <h1>Добавить товар</h1>
+        <form method="post" enctype="multipart/form-data">
+            <label for="img">Для Загрузки картинки</label><br>
+            <input type="file" name = "file" class = "form-control" autocomplete="off" id = "img"><br>
+            <input type = "text" class = "form-control" name = "title" id = "title" required placeholder="Введите название"><br>
+            <div class = "d-flex gap-5">
+                <input type = "number" class = "form-control" name = "price" id = "price" required placeholder="Введите цену">
+                <div class="dropdown">
+                
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        RUB
+                    </button>
+    
+
+    
+                    <ul class="dropdown-menu" >
+                      <li><button class="dropdown-item" type="button" value="RUB">RUB</button></li>
+                      <li><button class="dropdown-item"  type="button" value="USD">USD</button></li>
+                      <li><button class="dropdown-item"  type="button" value="EUR">EUR</button></li>
+                    </ul>
+                </div>
+            </div><br>
+
+            <input style="display: none;" id = "price_type" name = "price_type"><br>
+
+            <button class = "btn btn-success" type="submit">Добавить товар</button>
+            <a href = "{{ back }}" class = "btn btn-danger">Назад</a>
+
+
+        </form>
+    </div>
+</div>
+
+<style>
+    .dropdown-menu.active {
+        display: block;
+    }
+</style>
+
+<script>
+    let btn = document.getElementById("dropdownMenuButton1")
+    let menu = document.querySelector(".dropdown-menu")
+    let price_type = document.getElementById("price_type")
+    price_type.value = "RUB"
+
+    btn.addEventListener('click', () => {
+        
+        
+
+        menu.classList.toggle('active')
+
+
+
+        let menu_btn = menu.querySelectorAll("button")
+
+        for (let i = 0; i < menu_btn.length; i++) {
+            menu_btn[i].addEventListener('click', () => {
+                if (i == 0) {
+                    menu.classList.remove('active')
+                    btn.innerHTML = "RUB"
+                    price_type.value = "RUB";
+                    console.log(price_type.value)
+                } else if (i == 1) {
+                    menu.classList.remove('active')
+                    btn.innerHTML = "USD"
+                    price_type.value = "USD";
+                    console.log(price_type.value)
+                } else {
+                    menu.classList.remove('active')
+                    btn.innerHTML = "EUR"
+                    price_type.value = "EUR";
+                    console.log(price_type.value)
+                }
+
+            })
+        }
+
+    })
+</script>
+{% endblock %}
+

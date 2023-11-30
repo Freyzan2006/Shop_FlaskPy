@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{% extends 'layout.html' %}
+
+{% block title %}
+    Админ панель
+{% endblock %}
+
+
+{% block style %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <div class="Admin">
+        <h1>Админ панель</h1>
+        <p>Добро пожаловать {{ current_user.login }}</p>
+        <div class = "d-flex justify-content-center gap-2">
+            <a href="{{ url_for('create') }}" class="btn btn-warning">Добавить товар</a>
+            <a href="{{ url_for('All_users') }}" class = "btn btn-dark">Все Пользователи</a>
+        </div>
+        {% if items %}
+    
+            {% for item in items %}
+                <div class="card" style="width: 18rem;">
+                    <img src="{{ url_for('display_image', filename = item.image) }}" class="card-img-top" alt="Картинка товара">
+                    <div class="card-body">
+                        <h5 class="card-title">Название: {{ item.title }}</h5>
+                        <p class="card-text"><b>Цена: {{ item.price }} {{ item.price_type }}</b></p>
+                        <div class="modal-footer flex-column align-items-stretch w-100 gap-2 pb-3 border-top-0">
+                            <a href= "{{ url }}/delete/{{ item.id }}" class="btn btn-lg btn-danger">Удалить</a>
+                            <a href= "{{ url }}/editItem/{{ item.id }}" class="btn btn-lg btn-success">Редактировать</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}  
+            
+        {% else %}
+                <h2>Нету товаров на сайте</h2>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
